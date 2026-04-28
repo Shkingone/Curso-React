@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <Routes> 
       <Route path='/' element={ <Padre />}/>
-      <Route path='/config' element={ <Config />}/>
+      <Route path='/config/:id' element={ <Config />}/>
       
     </Routes>
   </React.StrictMode>
