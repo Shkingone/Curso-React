@@ -1,12 +1,25 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router';
+import { collection, addDoc, onSnapshot, query, orderBy, getDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 export default function Config() {
 
     const [title, setTitle] = useState("");
     const [precio, setPrecio] = useState("");
     const [descuento, setDescuento] = useState("");
     const [desc, setDesc] = useState("");
+    const { id } = useParams();
+
+   
+   
+       const fetchDoc = async () => {
+       const docSnap = await getDoc(doc(db, "itens", id));
+        console.log(docSnap.data());}
+         useEffect(()=>{
+            fetchDoc()
+}, [])
+
     return (
         <div style={{width: "100vw", height: "100vh", }}>
         <div style={{
