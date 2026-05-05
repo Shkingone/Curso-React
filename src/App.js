@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from './firebase';
 import { endsWith } from 'firebase/firestore/pipelines';
-
+import { useParams } from 'react-router';
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState('');
@@ -15,9 +15,11 @@ export default function App() {
       name: `nome`,
     }
   ])
+  const { id } = useParams();
+console.log(id)
   // Read data in real-time using onSnapshot
   useEffect(() => {
-    const q = query(collection(db, 'todos'), orderBy('createdAt'));
+    const q = query(collection(db, 'todos', id), orderBy('createdAt'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const todosData = [];
       querySnapshot.forEach((doc) => {

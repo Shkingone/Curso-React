@@ -11,7 +11,7 @@ const [mouseHover, setMouseHover]= useState (false);
 console.log(info)
         const [data, setData] = useState(info)
    
-
+    console.log("data", data)
 
     return (
         <div style={{
@@ -96,7 +96,7 @@ console.log(info)
 
             </div>
                        <Button variant="contained" href={"/config/"+ data.id}  style={{margin: "10px"}}>Config</Button>
-                        <Button variant="contained" href="/config"  style={{margin: "10px"}}>Config</Button>
+                      
         </div>
     );
 
