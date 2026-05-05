@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
 import { columnGap, positions } from "@mui/system";
 import { useEffect, useState } from "react";
-import {useParams} from "react-router-dom"
 import { query, collection, getDocs } from "firebase/firestore"
 import { db } from "./firebase";
 import { Button } from "@mui/material";
 
 export default function Mercado({info}) {
- const {id} = useParams()
+
 const [mouseHover, setMouseHover]= useState (false);
 console.log(info)
         const [data, setData] = useState(info)
@@ -96,7 +95,7 @@ console.log(info)
                 </div>
 
             </div>
-                       <Button variant="contained" href={"/config/"+ data.id}  style={{margin: "10px"}}>Product</Button>
+                       <Button variant="contained" href={"/config/"+ data.id}  style={{margin: "10px"}}>Config</Button>
                         <Button variant="contained" href="/config"  style={{margin: "10px"}}>Config</Button>
         </div>
     );
