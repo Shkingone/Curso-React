@@ -16,8 +16,8 @@ console.log(info)
     return (
         <div style={{
 
-            height: "400px",
-            width: "250px",
+            height: "425px",
+            width: "255px",
             alignContent: "center",
             backgroundColor: "#ffffff",
             border: "1px solid black",
@@ -75,13 +75,16 @@ console.log(info)
                     fontSize: "30px",
                     display: "flex",
                     flexDirection: "row",
-                    gap: "20px",
+                    gap: "10px",
                     padding: "8px"
                 }}>
                     <div> R${ data.precio?.toFixed(2)}</div>
 
                     {data.preciOriginal != data.precio &&
                         <div style={{
+                            dixplay: "flex",
+                            flexDirection: "row",
+                            gap: "5px",
                             borderRadius: "10px",
                             color: "#ffffff",
                             fontSize: "25px",
