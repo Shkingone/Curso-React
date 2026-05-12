@@ -15,7 +15,12 @@ export default function Config() {
    
        const fetchDoc = async () => {
        const docSnap = await getDoc(doc(db, "itens", id));
-        console.log(docSnap.data());}
+        console.log(docSnap.data());
+        setTitle(docSnap.data().nome);
+        setPrecio(`${docSnap.data().precio}`);
+        setDescuento(`${docSnap.data().descuento}`);
+        setDesc(docSnap.data().descripcion);
+    }
          useEffect(()=>{
             fetchDoc()
 }, [])
