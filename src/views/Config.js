@@ -1,15 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  query,
-  orderBy,
-  getDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 export default function Config() {
   const [title, setTitle] = useState("");
@@ -22,7 +14,7 @@ export default function Config() {
     try {
       await addDoc(collection(db, "itens"), {
         nome: title,
-        precio: Number(precio),
+        preciOriginal: Number(precio),
         descuento: Number(descuento),
         descripcion: desc,
       });
@@ -72,7 +64,6 @@ export default function Config() {
           padding: "20px",
           backgroundColor: "#ffffff",
           boxShadow: "10px 6px 10px rgba(235, 38, 38, 0.15)",
-          display: "flex",
           flexDirection: "column",
         }}
       >
