@@ -80,7 +80,7 @@ console.log(info)
                 }}>
                     <div> R${ data.precio?.toFixed(2)}</div>
 
-                    {data.preciOriginal != data.precio &&
+                    {data.precio != data.descuento &&
                         <div style={{
                             dixplay: "flex",
                             flexDirection: "row",

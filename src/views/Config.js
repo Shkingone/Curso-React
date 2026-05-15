@@ -18,11 +18,25 @@ export default function Config() {
   const [desc, setDesc] = useState("");
   const { id } = useParams();
 
+  const saveDoc = async () => {
+    try {
+      await addDoc(collection(db, "itens"), {
+        nome: title,
+        precio: Number(precio),
+        descuento: Number(descuento),
+        descripcion: desc,
+      });
+      console.log("documento guardado");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchDoc = async () => {
     const docSnap = await getDoc(doc(db, "itens", id));
     console.log(docSnap.data());
     setTitle(docSnap.data().nome);
-    setPrecio(`${docSnap.data().precio}`);
+    setPrecio(`${docSnap.data().preciOriginal}`);
     setDescuento(`${docSnap.data().descuento}`);
     setDesc(docSnap.data().descripcion);
   };
@@ -97,7 +111,7 @@ export default function Config() {
         />
 
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button variant="contained" color="success">
+          <Button onClick={saveDoc} variant="contained" color="success">
             Guardar
           </Button>
           <Button variant="contained" color="error">
