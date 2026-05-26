@@ -122,6 +122,14 @@ export default function Mercado({ info }) {
       >
         Config
       </Button>
+      <Button
+        variant="contained"
+        color="error"
+        href={"/add/"}
+        style={{ margin: "10px" }}
+      >
+        Add
+      </Button>
     </div>
   );
 }

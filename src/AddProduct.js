@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { collection, addDoc, getDoc, doc,setDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 export default function Config({isEditing}) {
   const [title, setTitle] = useState("");
@@ -34,24 +34,18 @@ export default function Config({isEditing}) {
     setDesc(docSnap.data().descripcion);
   };
   useEffect(() => {
-    if (isEditing) {
-        fetchDoc();
-    }
+    fetchDoc();
   }, []);
 
   const dataDoc = () => {
-   let idnew = id
-    const docRef = doc(db, "itens", ´$(idnew)´);
+    const docRef = doc(db, "itens", id);
 const data = {
         nome: title,
         preciOriginal: Number(precio),
         descuento: Number(descuento),
         descripcion: desc,
         };
-if (isEditing) {
     updateDoc(docRef, data);
-} else {    
-    setDoc(docRef, data);
 }
 
   return (

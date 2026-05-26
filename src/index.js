@@ -12,7 +12,8 @@ root.render(
   <React.StrictMode>
     <Routes> 
       <Route path='/' element={ <Padre />}/>
-      <Route path='/config/:id' element={ <Config />}/>
+      <Route path='/add' element={ <Config isEditing={false}/>}/>
+      <Route path='/config/:id' element={ <Config isEditing={true}/>}/>
       
     </Routes>
   </React.StrictMode>
