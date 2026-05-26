@@ -17,7 +17,8 @@ export default function Config() {
         preciOriginal: Number(precio),
         descuento: Number(descuento),
         descripcion: desc,
-      });
+      }
+    );
       console.log("documento guardado");
     } catch (error) {
       console.log(error);
@@ -35,6 +36,17 @@ export default function Config() {
   useEffect(() => {
     fetchDoc();
   }, []);
+
+  const dataDoc = () => {
+    const docRef = doc(db, "itens", id);
+const data = {
+        nome: title,
+        preciOriginal: Number(precio),
+        descuento: Number(descuento),
+        descripcion: desc,
+        };
+    updateDoc(docRef, data);
+}
 
   return (
     <div
@@ -67,9 +79,7 @@ export default function Config() {
           flexDirection: "column",
         }}
       >
-        <Button variant="contained" href="/">
-          Atrás
-        </Button>
+       
 
         <TextField
           label="Nombre"
@@ -102,10 +112,10 @@ export default function Config() {
         />
 
         <div style={{ display: "flex", gap: "10px" }}>
-          <Button onClick={saveDoc} variant="contained" color="success">
+          <Button onClick={dataDoc} variant="contained" color="success">
             Guardar
           </Button>
-          <Button variant="contained" color="error">
+          <Button href="/" variant="contained" color="error">
             Salir
           </Button>
         </div>
@@ -120,12 +130,7 @@ export default function Config() {
             marginTop: "10px",
           }}
         >
-          <Button color="error" fullWidth>
-            Eliminar
-          </Button>
-          <Button color="success" fullWidth>
-            Guardar
-          </Button>
+          
         </div>
       </div>
     </div>
