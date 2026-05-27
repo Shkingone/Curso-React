@@ -1,14 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import {
-  collection,
-  addDoc,
-  getDoc,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 export default function Config({ isEditing }) {
   const [title, setTitle] = useState("");
@@ -31,9 +24,9 @@ export default function Config({ isEditing }) {
       fetchDoc();
     }
   }, []);
-  
+
   const dataDoc = async () => {
-let idnew;
+    let idnew;
     if (isEditing) {
       idnew = id;
     } else {
@@ -54,6 +47,7 @@ let idnew;
       setDoc(docRef, data);
     }
   };
+
   return (
     <div
       style={{
@@ -118,6 +112,15 @@ let idnew;
         <div style={{ display: "flex", gap: "10px" }}>
           <Button onClick={dataDoc} variant="contained" color="success">
             Guardar
+          </Button>
+          <Button
+            onClick={async () => {
+              await deleteDoc(doc(db, "itens", id));
+            }}
+            variant="contained"
+            color="error"
+          >
+            Eliminar
           </Button>
           <Button href="/" variant="contained" color="error">
             Salir
