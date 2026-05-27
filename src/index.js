@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+//import App from './App';
 import Padre from './Padre';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Config from './views/Config';
@@ -12,7 +12,8 @@ root.render(
   <React.StrictMode>
     <Routes> 
       <Route path='/' element={ <Padre />}/>
-      <Route path='/config/:id' element={ <Config />}/>
+      <Route path='/add' element={ <Config isEditing={false}/>}/>
+      <Route path='/config/:id' element={ <Config isEditing={true}/>}/>
       
     </Routes>
   </React.StrictMode>
