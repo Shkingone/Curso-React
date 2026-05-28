@@ -1,13 +1,7 @@
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Paper, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  deleteDoc,
-  getDoc,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 
 import { db } from "../firebase";
 
@@ -77,36 +71,34 @@ export default function Config({ isEditing }) {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#b1a6a6",
-        width: "100%",
-        objectFit: "cover",
-        height: "100vh",
-        borderRadius: "10px",
+    <Box
+      sx={{
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        gap: "10px",
+        backgroundColor: "#f4f6f8",
+        padding: 2,
       }}
     >
-      <div
-        style={{
+      <Paper
+        elevation={5}
+        sx={{
+          width: "100%",
+          maxWidth: 400,
+          padding: 4,
+          borderRadius: 4,
           display: "flex",
-          gap: "10px",
-          justifyContent: "center",
-          border: "1px solid black",
-          borderRadius: "10px",
-          alignItems: "center",
-          height: "400px",
-          width: "250px",
-          padding: "20px",
-          backgroundColor: "#ffffff",
-          boxShadow: "10px 6px 10px rgba(235, 38, 38, 0.15)",
           flexDirection: "column",
+          gap: 2,
         }}
       >
+        <Typography variant="h5" fontWeight="bold" textAlign="center">
+          {isEditing ? "Editar Producto" : "Crear Producto"}
+        </Typography>
+
         <TextField
+          fullWidth
           label="Nombre"
           value={title}
           onChange={(e) => {
@@ -115,6 +107,7 @@ export default function Config({ isEditing }) {
         />
 
         <TextField
+          fullWidth
           label="Precio original"
           value={precio}
           onChange={(e) => {
@@ -123,6 +116,7 @@ export default function Config({ isEditing }) {
         />
 
         <TextField
+          fullWidth
           label="Descuento"
           value={descuento}
           onChange={(e) => {
@@ -131,6 +125,9 @@ export default function Config({ isEditing }) {
         />
 
         <TextField
+          fullWidth
+          multiline
+          rows={3}
           label="Descripción"
           value={desc}
           onChange={(e) => {
@@ -138,45 +135,37 @@ export default function Config({ isEditing }) {
           }}
         />
 
-        <div style={{ display: "flex", gap: "10px" }}>
-          <Button onClick={dataDoc} variant="contained" color="success">
-            Guardar
+        <Button
+          onClick={dataDoc}
+          variant="contained"
+          color="success"
+          size="large"
+        >
+          Guardar
+        </Button>
+
+        {isEditing && (
+          <Button
+            onClick={async () => {
+              try {
+                await deleteDoc(doc(db, "itens", id));
+                console.log("Documento eliminado");
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+            variant="contained"
+            color="error"
+            size="large"
+          >
+            Eliminar
           </Button>
+        )}
 
-          {isEditing && (
-            <Button
-              onClick={async () => {
-                try {
-                  await deleteDoc(doc(db, "itens", id));
-                  console.log("Documento eliminado");
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-              variant="contained"
-              color="error"
-            >
-              Eliminar
-            </Button>
-          )}
-
-          <Button href="/" variant="contained" color="error">
-            Salir
-          </Button>
-        </div>
-
-        <div
-          style={{
-            minHeight: "10px",
-            display: "flex",
-            gap: "10px",
-            width: "100%",
-            borderRadius: "10px",
-            backgroundColor: "white",
-            marginTop: "10px",
-          }}
-        ></div>
-      </div>
-    </div>
+        <Button href="/" variant="outlined" size="large">
+          Salir
+        </Button>
+      </Paper>
+    </Box>
   );
 }
