@@ -165,6 +165,87 @@ export default function Config({ isEditing }) {
         <Button href="/" variant="outlined" size="large">
           Salir
         </Button>
+        <div
+  style={{
+    width: "100%",
+    background: "#f8f9fa",
+    borderRadius: "15px",
+    padding: "15px",
+    marginTop: "10px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    border: "1px solid #e0e0e0",
+  }}
+>
+  <h3
+    style={{
+      margin: 0,
+      color: "#333",
+      fontSize: "18px",
+    }}
+  >
+    Resumen
+  </h3>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <strong>Producto:</strong>
+    <span>{title || "Sin nombre"}</span>
+  </div>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <strong>Precio:</strong>
+    <span>
+      {precio ? `R$ ${precio}` : "R$ 0"}
+    </span>
+  </div>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <strong>Descuento:</strong>
+    <span>
+      {descuento && precio ? `${descuento/precio*100}%` : "0%"}
+    </span>
+  </div>
+
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+    }}
+  >
+    <strong>Precio Final:</strong>
+
+    <span
+      style={{
+        color: "green",
+        fontWeight: "bold",
+      }}
+    >
+      R${" "}
+      {precio
+        ? (
+            Number(precio) -
+            (Number(precio) * Number(descuento || 0)) / 100
+          ).toFixed(2)
+        : "0.00"}
+    </span>
+  </div>
+</div>
       </Paper>
     </Box>
   );

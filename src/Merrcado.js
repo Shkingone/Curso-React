@@ -15,59 +15,56 @@ export default function Mercado({ info }) {
   return (
     <div
       style={{
-        height: "425px",
-        width: "255px",
-        alignContent: "center",
+        width: "260px",
         backgroundColor: "#ffffff",
-        border: "1px solid black",
-        borderRadius: "10px",
-        boxshadow: "0 4px 10px rgba(0,0,0,0.15)",
+        borderRadius: "20px",
+        overflow: "hidden",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+        display: "flex",
+        flexDirection: "column",
+        transition: "0.3s",
       }}
     >
       <div
         style={{
-          height: "50%",
-          alignContent: "center",
-          backgroundColor: " #fffffff",
+          height: "220px",
+          backgroundColor: "#f5f5f5",
         }}
       >
         <img
           style={{
             width: "100%",
-            objectFit: "cover",
             height: "100%",
-            borderRadius: "10px",
+            objectFit: "cover",
           }}
           src={data.imagen}
+          alt={data.nome}
         />
       </div>
+
       <div
         style={{
-          height: "50%",
-          border: "1px solid black",
-          backgroundColor: "#d3cfcf",
+          padding: "15px",
           display: "flex",
           flexDirection: "column",
-          gap: "3px",
-          borderRadius: "10px",
+          gap: "10px",
         }}
       >
         <div
           style={{
-            color: "Black",
             fontSize: "22px",
             fontWeight: "bold",
-            paddingTop: "15px",
+            color: "#222",
           }}
         >
-          {data["nome"]}
+          {data.nome}
         </div>
 
         <div
           style={{
-            color: "black",
             fontSize: "14px",
-            padding: "5px",
+            color: "#666",
+            minHeight: "40px",
           }}
         >
           {data.descripcion}
@@ -76,60 +73,66 @@ export default function Mercado({ info }) {
         {data.descuento != data.preciOriginal && (
           <div
             style={{
-              color: "#3f3939",
-              fontSize: "25px",
+              fontSize: "18px",
               textDecoration: "line-through",
-              padding: "8px",
+              color: "#888",
             }}
           >
-            R${data.preciOriginal?.toFixed(2)}
+            R$ {data.preciOriginal?.toFixed(2)}
           </div>
         )}
+
         <div
           style={{
-            color: "green",
-            fontSize: "30px",
             display: "flex",
-            flexDirection: "row",
+            alignItems: "center",
             gap: "10px",
-            padding: "8px",
+            flexWrap: "wrap",
           }}
         >
-          <div> R${data.descuento?.toFixed(2)}</div>
+          <div
+            style={{
+              color: "green",
+              fontSize: "30px",
+              fontWeight: "bold",
+            }}
+          >
+            R$ {data.descuento?.toFixed(2)}
+          </div>
 
           {data.preciOriginal != data.descuento && (
             <div
               style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "5px",
-                borderRadius: "10px",
-                color: "#ffffff",
-                fontSize: "25px",
-                backgroundColor: "#2d573b",
-                padding: "3px",
+                backgroundColor: "#2e7d32",
+                color: "white",
+                padding: "4px 10px",
+                borderRadius: "20px",
+                fontSize: "14px",
+                fontWeight: "bold",
               }}
             >
-              {100 - (data.descuento / data.preciOriginal) * 100 + "% off"}
+              {(100 - (data.descuento / data.preciOriginal) * 100).toFixed(0)}%
+              OFF
             </div>
           )}
         </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginTop: "10px",
+          }}
+        >
+          <Button fullWidth variant="contained" href={"/config/" + data.id}>
+            Config
+          </Button>
+
+          <Button fullWidth variant="outlined" color="success" href={"/add/"}>
+            Add
+          </Button>
+        </div>
       </div>
-      <Button
-        variant="contained"
-        href={"/config/" + data.id}
-        style={{ margin: "10px" }}
-      >
-        Config
-      </Button>
-      <Button
-        variant="contained"
-        color="error"
-        href={"/add/"}
-        style={{ margin: "10px" }}
-      >
-        Add
-      </Button>
     </div>
   );
 }
