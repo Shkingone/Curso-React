@@ -1,22 +1,41 @@
 import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
+import {
+  deleteDoc,
+  getDoc,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+
 import { db } from "../firebase";
+
 export default function Config({ isEditing }) {
   const [title, setTitle] = useState("");
   const [precio, setPrecio] = useState("");
   const [descuento, setDescuento] = useState("");
   const [desc, setDesc] = useState("");
+
   const { id } = useParams();
 
   const fetchDoc = async () => {
-    const docSnap = await getDoc(doc(db, "itens", id));
-    console.log(docSnap.data());
-    setTitle(docSnap.data().nome);
-    setPrecio(`${docSnap.data().preciOriginal}`);
-    setDescuento(`${docSnap.data().descuento}`);
-    setDesc(docSnap.data().descripcion);
+    try {
+      const docSnap = await getDoc(doc(db, "itens", id));
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        console.log(data);
+
+        setTitle(data.nome);
+        setPrecio(`${data.preciOriginal}`);
+        setDescuento(`${data.descuento}`);
+        setDesc(data.descripcion);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -26,25 +45,34 @@ export default function Config({ isEditing }) {
   }, []);
 
   const dataDoc = async () => {
-    let idnew;
-    if (isEditing) {
-      idnew = id;
-    } else {
-      idnew = Date.now();
-    }
+    try {
+      let idnew;
 
-    const docRef = doc(db, "itens", `${idnew}`);
-    const data = {
-      id: idnew,
-      nome: title,
-      preciOriginal: Number(precio),
-      descuento: Number(descuento),
-      descripcion: desc,
-    };
-    if (isEditing) {
-      updateDoc(docRef, data);
-    } else {
-      setDoc(docRef, data);
+      if (isEditing) {
+        idnew = id;
+      } else {
+        idnew = Date.now().toString();
+      }
+
+      const docRef = doc(db, "itens", `${idnew}`);
+
+      const data = {
+        id: idnew,
+        nome: title,
+        preciOriginal: Number(precio),
+        descuento: Number(descuento),
+        descripcion: desc,
+      };
+
+      if (isEditing) {
+        await updateDoc(docRef, data);
+        console.log("Documento actualizado");
+      } else {
+        await setDoc(docRef, data);
+        console.log("Documento creado");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -65,7 +93,6 @@ export default function Config({ isEditing }) {
       <div
         style={{
           display: "flex",
-
           gap: "10px",
           justifyContent: "center",
           border: "1px solid black",
@@ -94,6 +121,7 @@ export default function Config({ isEditing }) {
             setPrecio(e.target.value);
           }}
         />
+
         <TextField
           label="Descuento"
           value={descuento}
@@ -101,6 +129,7 @@ export default function Config({ isEditing }) {
             setDescuento(e.target.value);
           }}
         />
+
         <TextField
           label="Descripción"
           value={desc}
@@ -113,19 +142,29 @@ export default function Config({ isEditing }) {
           <Button onClick={dataDoc} variant="contained" color="success">
             Guardar
           </Button>
-          <Button
-            onClick={async () => {
-              await deleteDoc(doc(db, "itens", id));
-            }}
-            variant="contained"
-            color="error"
-          >
-            Eliminar
-          </Button>
+
+          {isEditing && (
+            <Button
+              onClick={async () => {
+                try {
+                  await deleteDoc(doc(db, "itens", id));
+                  console.log("Documento eliminado");
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+              variant="contained"
+              color="error"
+            >
+              Eliminar
+            </Button>
+          )}
+
           <Button href="/" variant="contained" color="error">
             Salir
           </Button>
         </div>
+
         <div
           style={{
             minHeight: "10px",
