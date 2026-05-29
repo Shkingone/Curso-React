@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 export default function Config({ isEditing }) {
   const [title, setTitle] = useState("");

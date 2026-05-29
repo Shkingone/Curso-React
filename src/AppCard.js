@@ -1,9 +1,9 @@
-import Mercado from "./Merrcado";
 import { useEffect, useState } from "react";
 
 import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
-export default function Padre() {
+import Card from "./Card";
+export default function AppCard() {
   const [itens, setItens] = useState([]);
 
   useEffect(() => {
@@ -11,11 +11,11 @@ export default function Padre() {
       const q = query(collection(db, "itens"));
       const qSnap = await getDocs(q);
       qSnap.docs.forEach((doc) => {
-       // console.log(doc.data());
+        // console.log(doc.data());
       });
       let ListTemporal = [];
       qSnap.docs.map((doc) => ListTemporal.push(doc.data()));
-      console.log("ListTemporal", ListTemporal)
+      console.log("ListTemporal", ListTemporal);
       setItens(ListTemporal);
     }
     fetchData();
@@ -35,7 +35,7 @@ export default function Padre() {
       }}
     >
       {itens.map((item) => (
-        <Mercado key={item.id} info={item} />
+        <Card key={item.id} info={item} />
       ))}
     </div>
   );

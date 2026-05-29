@@ -1,13 +1,8 @@
-//import styled from "@emotion/styled";
-//import { columnGap, positions } from "@mui/system";
-import { useEffect, useState } from "react";
-//import { query, collection, getDocs } from "firebase/firestore"
-import { db } from "./firebase";
+import { useState } from "react";
+
 import { Button } from "@mui/material";
 
-export default function Mercado({ info }) {
-  //const [mouseHover, setMouseHover]= useState (false);
-  // console.log(info);
+export default function Card({ info }) {
   const [data, setData] = useState(info);
 
   // console.log("data", data);
