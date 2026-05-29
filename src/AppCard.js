@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 import Card from "./Card";
+import Carousel from "./components/Carousel";
 export default function AppCard() {
   const [itens, setItens] = useState([]);
 
@@ -32,11 +33,14 @@ export default function AppCard() {
         justifyContent: "center",
         alignItems: "center",
         gap: "10px",
+       
       }}
     >
-      {itens.map((item) => (
-        <Card key={item.id} info={item} />
-      ))}
+      <Carousel title="Servicios">
+        {itens.map((item) => (
+          <Card key={item.id} info={item} />
+        ))}
+      </Carousel>
     </div>
   );
 }

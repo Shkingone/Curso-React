@@ -10,6 +10,8 @@ export default function Card({ info }) {
   return (
     <div
       style={{
+        flex: "0 0 auto",
+        scrollSnapAlign: "start",
         width: "260px",
         backgroundColor: "#ffffff",
         borderRadius: "20px",
@@ -22,7 +24,7 @@ export default function Card({ info }) {
     >
       <div
         style={{
-          height: "220px",
+          height: "120px",
           backgroundColor: "#f5f5f5",
         }}
       >

@@ -1,6 +1,6 @@
 import { Button, TextField, Paper, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 
 import { db } from "../../firebase";
@@ -12,7 +12,7 @@ export default function Config({ isEditing }) {
   const [desc, setDesc] = useState("");
 
   const { id } = useParams();
-
+const navigate = useNavigate();
   const fetchDoc = async () => {
     try {
       const docSnap = await getDoc(doc(db, "itens", id));
@@ -145,21 +145,25 @@ export default function Config({ isEditing }) {
         </Button>
 
         {isEditing && (
-          <Button
-            onClick={async () => {
-              try {
-                await deleteDoc(doc(db, "itens", id));
-                console.log("Documento eliminado");
-              } catch (error) {
-                console.log(error);
-              }
-            }}
-            variant="contained"
-            color="error"
-            size="large"
-          >
-            Eliminar
-          </Button>
+  <Button
+    onClick={async () => {
+      try {
+        await deleteDoc(doc(db, "itens", id));
+
+        console.log("Documento eliminado");
+
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    }}
+    variant="contained"
+    color="error"
+    size="large"
+  >
+    Eliminar
+  </Button>
+)}
         )}
 
         <Button href="/" variant="outlined" size="large">
