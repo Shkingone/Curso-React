@@ -123,9 +123,7 @@ export default function Card({ info }) {
             Config
           </Button>
 
-          <Button fullWidth variant="outlined" color="success" href={"/add/"}>
-            Add
-          </Button>
+        
         </div>
       </div>
     </div>
