@@ -1,6 +1,6 @@
 import Mercado from "./Merrcado";
 import { useEffect, useState } from "react";
-
+import { Button } from "@mui/material";
 import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 export default function Padre() {
@@ -11,10 +11,11 @@ export default function Padre() {
       const q = query(collection(db, "itens"));
       const qSnap = await getDocs(q);
       qSnap.docs.forEach((doc) => {
-       // console.log(doc.data());
+        console.log(doc.data());
       });
       let ListTemporal = [];
-      qSnap.docs.map((doc) => ListTemporal.push(doc.data()));
+      qSnap.docs.map((doc) => ListTemporal.push({ id: doc.id, ...doc.data() }));
+      
       console.log("ListTemporal", ListTemporal)
       setItens(ListTemporal);
     }
@@ -33,10 +34,14 @@ export default function Padre() {
         alignItems: "center",
         gap: "10px",
       }}
-    >
+    > <Button width="40px" variant="outlined" color="success" href={"/add/"}>
+            Add
+          </Button>
       {itens.map((item) => (
         <Mercado key={item.id} info={item} />
-      ))}
+      ))} 
+      
+     
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default function Mercado({ info }) {
   // console.log("data", data);
 
   return (
+    
     <div
       style={{
         width: "260px",
@@ -128,11 +129,9 @@ export default function Mercado({ info }) {
             Config
           </Button>
 
-          <Button fullWidth variant="outlined" color="success" href={"/add/"}>
-            Add
-          </Button>
         </div>
       </div>
-    </div>
+      </div>
+    
   );
 }

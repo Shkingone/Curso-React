@@ -2,7 +2,7 @@ import { Button, TextField, Paper, Typography, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { deleteDoc, getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
-
+import {v4 as uuidv4} from "uuid";
 import { db } from "../firebase";
 
 export default function Config({ isEditing }) {
@@ -45,7 +45,7 @@ export default function Config({ isEditing }) {
       if (isEditing) {
         idnew = id;
       } else {
-        idnew = Date.now().toString();
+        idnew = uuidv4();
       }
 
       const docRef = doc(db, "itens", `${idnew}`);
