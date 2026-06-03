@@ -1,14 +1,12 @@
-//import styled from "@emotion/styled";
-//import { columnGap, positions } from "@mui/system";
-import { useEffect, useState } from "react";
-//import { query, collection, getDocs } from "firebase/firestore"
-import { db } from "./firebase";
+
+import {  useState } from "react";
+
 import { Button } from "@mui/material";
 
 export default function Mercado({ info }) {
   //const [mouseHover, setMouseHover]= useState (false);
   // console.log(info);
-  const [data, setData] = useState(info);
+  const [data] = useState(info);
 
   // console.log("data", data);
 
@@ -71,7 +69,7 @@ export default function Mercado({ info }) {
           {data.descripcion}
         </div>
 
-        {data.descuento != data.preciOriginal && (
+        {data.descuento !== data.preciOriginal && (
           <div
             style={{
               fontSize: "18px",
@@ -101,7 +99,7 @@ export default function Mercado({ info }) {
             R$ {data.descuento?.toFixed(2)}
           </div>
 
-          {data.preciOriginal != data.descuento && (
+          {data.preciOriginal !== data.descuento && (
             <div
               style={{
                 backgroundColor: "#2e7d32",

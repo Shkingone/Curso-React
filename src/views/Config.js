@@ -218,7 +218,7 @@ export default function Config({ isEditing }) {
   >
     <strong>Descuento:</strong>
     <span>
-      {descuento && precio ? `${descuento/precio*100}%` : "0%"}
+      {descuento && precio ? `${100 - (Number(descuento) / Number(precio)) * 100}%` : "0%"}
     </span>
   </div>
 
@@ -237,10 +237,9 @@ export default function Config({ isEditing }) {
       }}
     >
       R${" "}
-      {precio
+      {descuento
         ? (
-            Number(precio) -
-            (Number(precio) * Number(descuento || 0)) / 100
+            Number(descuento) 
           ).toFixed(2)
         : "0.00"}
     </span>

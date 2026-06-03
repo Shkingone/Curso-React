@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
+
 export default function Padre() {
   const [itens, setItens] = useState([]);
 
