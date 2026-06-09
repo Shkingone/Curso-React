@@ -1,10 +1,10 @@
-import Mercado from "./Merrcado";
+import Mercado from "./CardProduct";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { query, collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
-export default function Padre() {
+export default function MainView() {
   const [itens, setItens] = useState([]);
 
   useEffect(() => {
