@@ -16,8 +16,8 @@ export default function MainView() {
       });
       let ListTemporal = [];
       qSnap.docs.map((doc) => ListTemporal.push({ id: doc.id, ...doc.data() }));
-      
-      console.log("ListTemporal", ListTemporal)
+
+      console.log("ListTemporal", ListTemporal);
       setItens(ListTemporal);
     }
     fetchData();
@@ -35,14 +35,14 @@ export default function MainView() {
         alignItems: "center",
         gap: "10px",
       }}
-    > <Button width="40px" variant="outlined" color="success" href={"/add/"}>
-            Add
-          </Button>
+    >
+      <Button width="40px" variant="outlined" color="success" href={"/add/"}>
+        Add
+      </Button>
+
       {itens.map((item) => (
         <Mercado key={item.id} info={item} />
-      ))} 
-      
-     
+      ))}
     </div>
   );
 }
