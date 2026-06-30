@@ -64,8 +64,8 @@ name: "holanda",
       });
       let ListTemporal = [];
       qSnap.docs.map((doc) => ListTemporal.push({ id: doc.id, ...doc.data() }));
-      
-      console.log("ListTemporal", ListTemporal)
+
+      console.log("ListTemporal", ListTemporal);
       setItens(ListTemporal);
     }
     fetchData();
@@ -83,6 +83,7 @@ name: "holanda",
         alignItems: "center",
         gap: "10px",
       }}
+<<<<<<< HEAD
     > <Button width="40px" variant="outlined" color="success" href={"/add/"}>
             Add
           </Button>
@@ -92,6 +93,16 @@ name: "holanda",
       ))} 
       </div>
      
+=======
+    >
+      <Button width="40px" variant="outlined" color="success" href={"/add/"}>
+        Add
+      </Button>
+
+      {itens.map((item) => (
+        <Mercado key={item.id} info={item} />
+      ))}
+>>>>>>> d6d6075a717938349ec4397def193c103c49a057
     </div>
   ); */
 }

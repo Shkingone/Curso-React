@@ -1,5 +1,4 @@
-
-import {  useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@mui/material";
 
@@ -11,12 +10,16 @@ export default function Mercado({ info }) {
   // console.log("data", data);
 
   return (
-    
     <div
       style={{
         width: "260px",
+<<<<<<< HEAD
         minWidth: "260px",
         maxWidth: "260px",
+=======
+        maxWidth: "260px",
+        minWidth: "260px",
+>>>>>>> d6d6075a717938349ec4397def193c103c49a057
         flexShrink: 0,
         backgroundColor: "#ffffff",
         borderRadius: "20px",
@@ -29,7 +32,7 @@ export default function Mercado({ info }) {
     >
       <div
         style={{
-          height: "220px",
+          height: "80px",
           backgroundColor: "#f5f5f5",
         }}
       >
@@ -95,7 +98,7 @@ export default function Mercado({ info }) {
           <div
             style={{
               color: "green",
-              fontSize: "30px",
+              fontSize: "20px",
               fontWeight: "bold",
             }}
           >
@@ -109,7 +112,7 @@ export default function Mercado({ info }) {
                 color: "white",
                 padding: "4px 10px",
                 borderRadius: "20px",
-                fontSize: "14px",
+                fontSize: "12px",
                 fontWeight: "bold",
               }}
             >
@@ -129,10 +132,8 @@ export default function Mercado({ info }) {
           <Button fullWidth variant="contained" href={"/config/" + data.id}>
             Config
           </Button>
-
         </div>
       </div>
-      </div>
-    
+    </div>
   );
 }
