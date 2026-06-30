@@ -12,9 +12,9 @@ root.render(
   <React.StrictMode>
     <Routes> 
       <Route path='/' element={ <MainView />}/>
-      <Route path='/add' element={ <Config isEditing={false}/>}/>
+      {/* <Route path='/add' element={ <Config isEditing={false}/>}/>
       <Route path='/config/:id' element={ <Config isEditing={true}/>}/>
-      
+       */}
     </Routes>
   </React.StrictMode>
   </BrowserRouter>

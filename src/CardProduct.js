@@ -15,6 +15,9 @@ export default function Mercado({ info }) {
     <div
       style={{
         width: "260px",
+        minWidth: "260px",
+        maxWidth: "260px",
+        flexShrink: 0,
         backgroundColor: "#ffffff",
         borderRadius: "20px",
         overflow: "hidden",
